@@ -51,11 +51,9 @@ const App = () => {
       <div className="text-container">
         <h1>
           <img src={logo} alt="Logo ChronoMind" style={{ width: "50px", marginRight: "10px" }} />
-          CHRONO MIND
         </h1>
-        <p>Round 1</p>
         <button onClick={rollDice} disabled={isRolling}>
-          {isRolling ? "Rolling..." : "Generate a Timer"}
+          {isRolling ? "Rolling..." : "Roll the dice !"}
         </button>
         {dice && <p>Dice Rolled: {dice}</p>}
         {timer && <p>Timer: {timer} seconds</p>}
