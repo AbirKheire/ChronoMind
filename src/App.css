@@ -1,4 +1,5 @@
-/* General Styles */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
 body {
   margin: 0;
   padding: 0;
@@ -8,6 +9,7 @@ body {
   align-items: center;
   background: #7ed957; /* Green background color */
   overflow: hidden;
+  font-family: 'Fredoka One', Arial, sans-serif;
 }
 
 /* Full-Screen Background */
@@ -53,12 +55,22 @@ body {
   animation-delay: 3s;
 }
 
+img.logo {
+  width: 200px; /* Adjust the size as needed */
+  height: auto;
+  filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5)); /* Add the shadow */
+  transition: transform 0.3s ease-in-out;
+}
+
+img.logo:hover {
+  transform: scale(1.1); /* Optional: Add a hover effect */
+}
 /* Text Content */
 .text-container {
   position: relative;
   z-index: 2;
   color: white;
-  font-family: 'Arial Black', sans-serif;
+  font-family: 'Fredoka One', Arial, sans-serif;
   text-align: center;
   text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 }
@@ -93,6 +105,7 @@ button {
   padding: 15px 30px;
   font-size: 1.2rem;
   font-weight: bold;
+  font-family: 'Fredoka One', Arial, sans-serif;
   color: #fff;
   background: linear-gradient(90deg, #ffb142, #ff793f);
   border: none;

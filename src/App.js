@@ -50,7 +50,9 @@ const App = () => {
       {/* Main content */}
       <div className="text-container">
         <h1>
-          <img src={logo} alt="Logo ChronoMind" style={{ width: "50px", marginRight: "10px" }} />
+          <img src={logo} 
+          alt="Logo ChronoMind" 
+          style={{ width: "200px", marginRight: "10px" }} />
         </h1>
         <button onClick={rollDice} disabled={isRolling}>
           {isRolling ? "Rolling..." : "Roll the dice !"}
