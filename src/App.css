@@ -1,38 +1,108 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  background: #7ed957; /* Green background color */
+  overflow: hidden;
+}
+
+/* Full-Screen Background */
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Circular Visuals */
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  animation: pulse 6s infinite;
+}
+
+.circle1 {
+  width: 200px;
+  height: 200px;
+  background: #ff995a; /* Orange light */
+  top: -50px;
+  left: -50px;
+}
+
+.circle2 {
+  width: 300px;
+  height: 300px;
+  background: #ff793f; /* Medium orange */
+  bottom: -100px;
+  right: -100px;
+}
+
+.circle3 {
+  width: 250px;
+  height: 250px;
+  background: #f1471c; /* Dark orange */
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: 3s;
+}
+
+/* Text Content */
+.text-container {
+  position: relative;
+  z-index: 2;
   color: white;
+  font-family: 'Arial Black', sans-serif;
+  text-align: center;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 }
 
-.App-link {
-  color: #61dafb;
+.text-container h1 {
+  font-size: 3rem;
+  margin: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.text-container p {
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+
+/* Animations for Circles */
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
   }
+}
+
+/* Button Styling */
+button {
+  position: relative;
+  z-index: 2;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(90deg, #ffb142, #ff793f);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.5);
 }
