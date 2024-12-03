@@ -10,8 +10,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: rgba(221,50,125);
+    min-height: 100vh
 }
 .container{
     display: grid;
@@ -130,5 +129,5 @@ body{
 }
 .roll:hover{
     color: #fff;
-    background: rgba(221,50,125);
+
 }
