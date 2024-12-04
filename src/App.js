@@ -3,12 +3,16 @@ import logo from "./assets/logoorangef.png";
 import "./App.css";
 import "./dice.css"; // Ensure the dice styles are imported
 
+// Import soundtrack
+import soundtrack from "./assets/countdown.mp3"; // Replace with your actual file path
+
 const App = () => {
   const diceRef = useRef(null); // Reference to the dice element
   const [timer, setTimer] = useState(null);
   const [countdown, setCountdown] = useState(null);
   const [isRolling, setIsRolling] = useState(false);
   const [message, setMessage] = useState(""); // Message for "Ready?", countdown, "GO!", or "Time's up!"
+  const soundtrackRef = useRef(null); // Reference for the soundtrack audio
 
   // Map dice face to timer duration
   const diceToTimer = {
@@ -20,6 +24,20 @@ const App = () => {
     6: 60,
   };
 
+  const playSoundtrack = () => {
+    if (!soundtrackRef.current) {
+      soundtrackRef.current = new Audio(soundtrack);
+    }
+    soundtrackRef.current.play();
+  };
+
+  const stopSoundtrack = () => {
+    if (soundtrackRef.current) {
+      soundtrackRef.current.pause();
+      soundtrackRef.current.currentTime = 0; // Reset soundtrack to the beginning
+    }
+  };
+
   const rollDice = () => {
     if (isRolling) return; // Prevent multiple rolls at once
 
@@ -27,6 +45,7 @@ const App = () => {
     setTimer(null);
     setCountdown(null);
     setMessage("");
+    stopSoundtrack(); // Stop any playing soundtrack
 
     setIsRolling(true); // Set rolling state
     const random = Math.floor(Math.random() * 6) + 1; // Generate random dice face
@@ -75,6 +94,7 @@ const App = () => {
   };
 
   const startTransition = (onComplete) => {
+    playSoundtrack(); // Play the soundtrack
     setMessage("Ready?");
     setTimeout(() => {
       setMessage("3");
@@ -84,6 +104,7 @@ const App = () => {
           setMessage("1");
           setTimeout(() => {
             setMessage("GO!");
+            stopSoundtrack(); // Stop the soundtrack when the timer starts
             setTimeout(() => {
               setMessage(""); // Clear message
               onComplete(); // Trigger the callback to start the timer
