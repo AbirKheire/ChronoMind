@@ -8,7 +8,7 @@ const App = () => {
   const [timer, setTimer] = useState(null);
   const [countdown, setCountdown] = useState(null);
   const [isRolling, setIsRolling] = useState(false);
-  const [message, setMessage] = useState(""); // Message for "Ready?", countdown, "GO!"
+  const [message, setMessage] = useState(""); // Message for "Ready?", countdown, "GO!", or "Time's up!"
 
   // Map dice face to timer duration
   const diceToTimer = {
@@ -23,8 +23,12 @@ const App = () => {
   const rollDice = () => {
     if (isRolling) return; // Prevent multiple rolls at once
 
+    // Reset timer, countdown, and message
+    setTimer(null);
+    setCountdown(null);
+    setMessage("");
+
     setIsRolling(true); // Set rolling state
-    setMessage(""); // Clear previous message
     const random = Math.floor(Math.random() * 6) + 1; // Generate random dice face
 
     const dice = diceRef.current; // Access dice DOM element
@@ -56,6 +60,7 @@ const App = () => {
         default:
           break;
       }
+
       dice.style.animation = "none";
 
       // Start the transitional messages
@@ -91,7 +96,13 @@ const App = () => {
 
   // Countdown logic
   useEffect(() => {
-    if (countdown === null || countdown <= 0) return;
+    if (countdown === null || countdown <= 0) {
+      if (countdown === 0) {
+        setMessage("Time's up!"); // Show "Time's up!" when countdown ends
+        setCountdown(null); // Clear the countdown
+      }
+      return;
+    }
 
     const interval = setInterval(() => {
       setCountdown((prev) => prev - 1);
@@ -136,15 +147,14 @@ const App = () => {
             className="transition-message"
             style={{
               fontSize: "3rem",
-              color: message === "START !" ? "red" : "blue",
+              color: message === "GO!" || message === "Time's up!" ? "red" : "blue",
               transition: "opacity 0.5s",
             }}
           >
             {message}
           </p>
         )}
-        {timer && <p>Timer: {timer} seconds</p>}
-        {countdown !== null && <p>Countdown: {countdown} seconds</p>}
+        {timer && countdown !== null && <p>Countdown: {countdown} seconds</p>}
       </div>
     </div>
   );
