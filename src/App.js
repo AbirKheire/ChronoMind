@@ -5,6 +5,7 @@ import "./dice.css"; // Ensure the dice styles are imported
 
 // Import soundtrack
 import soundtrack from "./assets/countdown.mp3"; // Replace with your actual file path
+import alertSound from "./assets/countdown.mp3"; // Alert sound for the last 3 seconds
 
 const App = () => {
   const diceRef = useRef(null); // Reference to the dice element
@@ -126,7 +127,13 @@ const App = () => {
     }
 
     const interval = setInterval(() => {
-      setCountdown((prev) => prev - 1);
+      setCountdown((prev) => {
+        if (prev <= 4 && prev > 1) {
+          const alertAudio = new Audio(alertSound);
+          alertAudio.play(); // Play alert sound during the last 3 seconds
+        }
+        return prev - 1;
+      });
     }, 1000);
 
     return () => clearInterval(interval);
