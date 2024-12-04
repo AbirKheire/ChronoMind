@@ -8,6 +8,7 @@ const App = () => {
   const [timer, setTimer] = useState(null);
   const [countdown, setCountdown] = useState(null);
   const [isRolling, setIsRolling] = useState(false);
+  const [message, setMessage] = useState(""); // Message for "Ready?", countdown, "GO!"
 
   // Map dice face to timer duration
   const diceToTimer = {
@@ -23,6 +24,7 @@ const App = () => {
     if (isRolling) return; // Prevent multiple rolls at once
 
     setIsRolling(true); // Set rolling state
+    setMessage(""); // Clear previous message
     const random = Math.floor(Math.random() * 6) + 1; // Generate random dice face
 
     const dice = diceRef.current; // Access dice DOM element
@@ -56,13 +58,35 @@ const App = () => {
       }
       dice.style.animation = "none";
 
-      // Set timer based on dice face
-      const duration = diceToTimer[random];
-      setTimer(duration);
-      setCountdown(duration);
+      // Start the transitional messages
+      startTransition(() => {
+        const duration = diceToTimer[random];
+        setTimer(duration);
+        setCountdown(duration);
+      });
 
       setIsRolling(false); // End rolling state
     }, 4050); // Duration matches dice animation time
+  };
+
+  const startTransition = (onComplete) => {
+    setMessage("Ready?");
+    setTimeout(() => {
+      setMessage("3");
+      setTimeout(() => {
+        setMessage("2");
+        setTimeout(() => {
+          setMessage("1");
+          setTimeout(() => {
+            setMessage("GO!");
+            setTimeout(() => {
+              setMessage(""); // Clear message
+              onComplete(); // Trigger the callback to start the timer
+            }, 1000); // Show "GO!" for 1 second
+          }, 1000);
+        }, 1000);
+      }, 1000);
+    }, 1000); // "Ready?" stays for 1 second
   };
 
   // Countdown logic
@@ -95,7 +119,7 @@ const App = () => {
           />
         </h1>
         <button onClick={rollDice} disabled={isRolling}>
-          {isRolling ? "Rolling..." : "Roll the dice !"}
+          {isRolling ? "Rolling..." : "Roll the dice!"}
         </button>
         <div className="container">
           <div className="dice" ref={diceRef}>
@@ -107,6 +131,18 @@ const App = () => {
             <div className="face left"></div>
           </div>
         </div>
+        {message && (
+          <p
+            className="transition-message"
+            style={{
+              fontSize: "3rem",
+              color: message === "START !" ? "red" : "blue",
+              transition: "opacity 0.5s",
+            }}
+          >
+            {message}
+          </p>
+        )}
         {timer && <p>Timer: {timer} seconds</p>}
         {countdown !== null && <p>Countdown: {countdown} seconds</p>}
       </div>

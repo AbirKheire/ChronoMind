@@ -45,7 +45,6 @@ body{
     transform-style: preserve-3d;
 }
 .face::before{
-    content: '';
     position: absolute;
     width: 100%;
     height: 100%;

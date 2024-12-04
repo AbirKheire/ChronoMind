@@ -67,20 +67,23 @@ img.logo:hover {
 }
 /* Text Content */
 .text-container {
+  font-family: 'Fredoka One', Arial, sans-serif;
   position: relative;
   z-index: 2;
-  color: white;
+  color: black;
   font-family: 'Fredoka One', Arial, sans-serif;
   text-align: center;
   text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 .text-container h1 {
+  font-family: 'Fredoka One', Arial, sans-serif;
   font-size: 3rem;
   margin: 0;
 }
 
 .text-container p {
+  font-family: 'Fredoka One', Arial, sans-serif;
   font-size: 1.5rem;
   margin: 10px 0;
 }
